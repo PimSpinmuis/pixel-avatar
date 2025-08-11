@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "prebuild": "tailwindcss -i ./src/tailwind.css -o ./src/index.css --minify",
     "dev:css": "tailwindcss -i ./src/tailwind.css -o ./src/index.css -w",
     "dev:vite": "vite",
     "dev": "concurrently -k \"npm:dev:*\"",

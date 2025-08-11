@@ -205,7 +205,7 @@ export default function App() {
   return (
     <div className="font-sans p-4 max-w-[1000px] mx-auto">
       <h1 className="text-2xl font-semibold">Pixelart Avatar — Minimal Editor (32×32)</h1>
-      <p className="text-gray-600 mt-1">Brush & erase, kleurkiezer, undo/redo, PNG export. Alles draait lokaal.</p>
+      <p className="text-gray-600 mt-1">Brush & erase, color picker, undo/redo, PNG export.</p>
 
       <div className="flex gap-5 items-start flex-wrap">
         <div className="w-[512px] max-w-full">

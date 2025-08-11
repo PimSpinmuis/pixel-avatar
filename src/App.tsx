@@ -171,6 +171,25 @@ export default function App() {
       URL.revokeObjectURL(url);
     }, "image/png");
   }
+  function exportAvatar(size: number, filename: string) {
+  const exportCanvas = document.createElement("canvas");
+  exportCanvas.width = size;
+  exportCanvas.height = size;
+  const ex = exportCanvas.getContext("2d")!;
+  ex.imageSmoothingEnabled = false;
+  ex.clearRect(0, 0, size, size);
+  ex.drawImage(workRef.current!, 0, 0, size, size);
+
+  exportCanvas.toBlob((blob) => {
+    if (!blob) return;
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    a.click();
+    URL.revokeObjectURL(url);
+  }, "image/png");
+}
 
   // ---------- Pointer Events (simpel & één codepad) ----------
   function onPointerDown(e: React.PointerEvent<HTMLCanvasElement>) {
@@ -257,6 +276,32 @@ export default function App() {
               <button onClick={clearAll}>🗑️ Clear</button>
               <button onClick={fillAll}>🎨 Fill</button>
               <button onClick={exportPNG} className="ml-auto">⬇️ Export PNG</button>
+            </div>
+
+            <div className="mt-2 grid gap-2">
+              <div className="text-sm font-semibold">Export presets</div>
+              <div className="flex flex-wrap gap-2">
+                {/* Discord profile */}
+                <button className="px-3 py-1 border border-gray-300 rounded hover:bg-gray-100" onClick={() => exportAvatar(128, "discord-128.png")}>
+                  Discord 128px * 128px
+                </button>
+
+                {/* Twitch emote sizes */}
+                <button className="px-3 py-1 border border-gray-300 rounded hover:bg-gray-100" onClick={() => exportAvatar(112, "twitch-112.png")}>
+                  Twitch 112px * 112px
+                </button>
+                <button className="px-3 py-1 border border-gray-300 rounded hover:bg-gray-100" onClick={() => exportAvatar(56, "twitch-56.png")}>
+                  Twitch 56px * 56px
+                </button>
+                <button className="px-3 py-1 border border-gray-300 rounded hover:bg-gray-100" onClick={() => exportAvatar(28, "twitch-28.png")}>
+                  Twitch 28px * 28px
+                </button>
+
+                {/* X / Twitter profile */}
+                <button className="px-3 py-1 border border-gray-300 rounded hover:bg-gray-100" onClick={() => exportAvatar(400, "twitter-400.png")}>
+                  X/Twitter 400px * 400px
+                </button>
+              </div>
             </div>
 
             <details>
